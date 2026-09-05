@@ -12,7 +12,7 @@ PACKAGE = Path(__file__).resolve().parents[1]
 def run(command, cwd, expect=True, contains=None):
     result = subprocess.run(command, cwd=cwd, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     if (result.returncode == 0) != expect or (contains and contains not in result.stdout):
-        raise AssertionError(f"{command} returned {result.returncode}\n{result.stdout[-16000:]}")
+        raise AssertionError(f"{command} returned {result.returncode}\n{result.stdout}")
     return result.stdout
 
 def config(root, forbidden):

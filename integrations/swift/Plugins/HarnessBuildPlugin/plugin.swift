@@ -9,7 +9,7 @@ struct HarnessBuildPlugin: BuildToolPlugin {
             target: target.name,
             sources: target.sourceFiles(withSuffix: "swift").map(\.path),
             work: context.pluginWorkDirectory,
-            executable: context.tool(named: "HarnessSwiftLint").path
+            executable: context.tool(named: "harness-swift-lint").path
         )]
     }
 
@@ -34,7 +34,7 @@ extension HarnessBuildPlugin: XcodeBuildToolPlugin {
             target: target.displayName,
             sources: target.inputFiles.filter { $0.path.extension == "swift" }.map(\.path),
             work: context.pluginWorkDirectory,
-            executable: context.tool(named: "HarnessSwiftLint").path
+            executable: context.tool(named: "harness-swift-lint").path
         )]
     }
 }
