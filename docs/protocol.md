@@ -1,5 +1,7 @@
 # Configuration and evidence
 
+This protocol supports build-time hard gates and their diagnostics. It does not define an agent runtime or an autonomous task-execution loop. The native build is the primary feedback channel; reports make its results inspectable by agents, developers and CI.
+
 `packages/core/schema.json` describes `harness.yaml` version 1. Runtime validation additionally checks unique IDs, module references and repository-relative paths. Unknown keys fail validation. Policies are explicit, and a selected module without a required static check cannot pass.
 
 Each check declares an ID, applicable modules, `static` or `verify` phase, argv array, optional cwd, timeout, required flag and output format. `required` defaults to true. Text-mode success means exit code zero; warning policy belongs to the invoked tool.
@@ -21,9 +23,9 @@ Core reports are written to `.harness/report-<module>-<phase>.json`. Web native 
 
 All tracked files contribute to the hash, including tracked files beneath directories named `build` or `dist`. Untracked generated artifacts follow Git ignore rules and standard tool-output exclusions. Keep artifacts out of tracked source. Native Gradle and Swift use their own build inputs and output declarations for invalidation. A pass report is historical evidence, not an authorization token; CI reruns tasks for the candidate revision.
 
-## Optional task context
+## Optional CLI helpers
 
-Native builds do not require a task session. The auxiliary CLI can give agents explicit scope and acceptance context:
+Native builds do not require a task session. The existing `start` and `finish` helpers optionally record scope and check-based acceptance for callers that want those records. They are auxiliary utilities, not the project's primary integration or an agent lifecycle manager:
 
 ```json
 {

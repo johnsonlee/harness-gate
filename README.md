@@ -1,8 +1,19 @@
 # Harness
 
-Executable engineering constraints for existing Android, iOS, Java/Gradle, Node.js, React, Next.js and Bun projects.
+The **hard-gate layer of an agent harness**, enforced through the native build systems of Android, iOS, Java/Gradle, Node.js, React, Next.js and Bun projects.
 
 Install a native integration, declare the rules your project actually follows, and keep using its existing build commands. Violations fail those commands. The agent does not need to remember to invoke a separate CLI.
+
+The feedback loop is concrete: **edit code → run the existing build → receive a rule failure and its diagnostics → correct the code → rebuild**. This project supplies the enforceable gate and feedback; the calling agent decides and performs the correction.
+
+## Design priorities
+
+- **Early feedback:** attach each check to the earliest native build phase with the inputs it needs. Source checks can run before packaging; JVM bytecode boundaries run after compilation.
+- **Actionable failures:** identify the violated constraint and relevant code or dependency, preserve tool diagnostics, and return a failing exit status so the agent can respond immediately.
+- **Reliable enforcement:** declared required checks cannot silently pass when unavailable. Local builds provide the first feedback, and CI verifies the same constraints for the proposed change.
+- **Reusable policy:** publish shared rule libraries and build integrations; let target projects explicitly configure their own boundaries and exceptions.
+
+Agent sessions, model calls, task planning, context management and long-running recovery belong to the surrounding agent harness. They are outside this project's scope. Native build integration, feedback quality and correctly blocking violations are the product's success criteria.
 
 ## Integrations
 
@@ -18,7 +29,7 @@ Install a native integration, declare the rules your project actually follows, a
 
 Java/Kotlin packages, Maven group and Gradle plugin ID use **`io.johnsonlee.harness`**. npm packages use `@harness-engine`; no public registry release is implied.
 
-Local builds run static constraints. Complete verification runs the project's existing tests plus configured cross-module and OpenAPI checks. Native build systems own task scheduling; harness does not wrap Gradle or Swift in Node.
+Local builds run static constraints. Verification tasks run the project's existing tests plus configured cross-module and OpenAPI checks. Native build systems own task scheduling; harness does not wrap Gradle or Swift in Node.
 
 ## Develop and package
 
@@ -60,7 +71,7 @@ For Gradle, Swift and Xcode, initialization emits explicit integration instructi
 - [SwiftPM and Xcode](integrations/swift/README.md)
 - [OpenAPI compatibility](integrations/openapi/README.md)
 - [CI and required checks](docs/ci.md)
-- [Verification protocol and task context](docs/protocol.md)
+- [Verification protocol and optional CLI helpers](docs/protocol.md)
 
 ## Scope and evidence
 
