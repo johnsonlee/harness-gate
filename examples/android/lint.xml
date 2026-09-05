@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!-- A deliberately simple example policy, not a universal Android rule. -->
+    <issue id="HarnessForbiddenImport" severity="error">
+        <option name="forbiddenPackages" value="java.util" />
+    </issue>
+</lint>

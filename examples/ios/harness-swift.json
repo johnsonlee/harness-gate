@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "targets": {
+    "App": {
+      "forbiddenImports": [
+        "Dispatch"
+      ]
+    }
+  }
+}

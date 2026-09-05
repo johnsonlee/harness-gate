@@ -1,0 +1,25 @@
+{
+  "name": "harness-example-node",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "harness-build build",
+    "check": "harness-build check",
+    "lint": "eslint ."
+  },
+  "harness": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@harness-engine/core": "file:../../.harness/artifacts/harness-engine-core-0.1.0.tgz",
+    "@harness-engine/build": "file:../../.harness/artifacts/harness-engine-build-0.1.0.tgz",
+    "@harness-engine/eslint-plugin": "file:../../.harness/artifacts/harness-engine-eslint-plugin-0.1.0.tgz",
+    "eslint": "9.39.5",
+    "typescript-eslint": "8.69.0",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}

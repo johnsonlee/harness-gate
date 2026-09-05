@@ -1,0 +1,17 @@
+{
+  "stack": "bun",
+  "install": [
+    "bun",
+    "install",
+    "--frozen-lockfile"
+  ],
+  "build": [
+    "bun",
+    "run",
+    "build"
+  ],
+  "entry": "src/index.ts",
+  "violation": "\nimport \"node:fs\";\n",
+  "expectedDiagnostic": "harness/forbidden-imports",
+  "artifact": "dist/index.js"
+}

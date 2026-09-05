@@ -1,0 +1,15 @@
+{
+  "stack": "android",
+  "build": [
+    "../../integrations/gradle/gradlew",
+    "--no-daemon",
+    "assembleDebug"
+  ],
+  "entry": "src/main/java/io/johnsonlee/harness/example/android/MainActivity.java",
+  "expectedDiagnostic": "HarnessForbiddenImport",
+  "artifact": "build/outputs/apk/debug/harness-android-example-debug.apk",
+  "mutation": {
+    "find": "import android.app.Activity;",
+    "replace": "import android.app.Activity;\nimport java.util.List;"
+  }
+}

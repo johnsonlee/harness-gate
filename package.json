@@ -1,0 +1,26 @@
+{
+  "name": "harness-engine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "test": "npm run build && node --test tests/*.test.mjs && npm test --workspace @harness-engine/eslint-plugin",
+    "test:consumers": "npm run build && node --test tests/consumers/*.test.mjs",
+    "check": "npm test && npm run test:consumers",
+    "pack:local": "npm run build && node scripts/pack.mjs",
+    "examples:verify": "npm run pack:local && node scripts/verify-examples.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.0",
+    "typescript": "~5.9.3",
+    "eslint": "^9.39.0",
+    "typescript-eslint": "^8.69.0"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}
