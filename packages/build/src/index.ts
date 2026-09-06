@@ -8,12 +8,12 @@ import {
   summarize,
   runCheck,
   digest,
-} from "@harness-engine/core";
+} from "harness-gate-core";
 
 async function main() {
   const phase = process.argv[2];
   if (phase !== "build" && phase !== "check")
-    throw new Error("Usage: harness-build <build|check>");
+    throw new Error("Usage: harness-gate <build|check>");
   const cwd = process.cwd();
   const root = await findRoot(cwd);
   const before = await digest(root);

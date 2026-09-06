@@ -1,4 +1,4 @@
-# Harness
+# Harness Gate
 
 The **hard-gate layer of an agent harness**, enforced through the native build systems of Android, iOS, Java/Gradle, Node.js, React, Next.js and Bun projects.
 
@@ -27,9 +27,9 @@ Agent sessions, model calls, task planning, context management and long-running 
 | Next.js | Same integration, preserving `next build` | `npm run build` |
 | Bun | Same integration, explicit Bun scripts | `bun run build` / `check` |
 
-Java/Kotlin packages, Maven group and Gradle plugin ID use **`io.johnsonlee.harness`**. npm packages use `@harness-engine`; no public registry release is implied.
+Java/Kotlin packages, Maven group and Gradle plugin ID use **`io.johnsonlee.harness`**. The unscoped npm packages are `harness-gate` (build integration), `harness-gate-core`, `eslint-plugin-harness-gate` and `harness-gate-cli`. The CLI command is `harness-gate-cli`; no public registry release is implied.
 
-Local builds run static constraints. Verification tasks run the project's existing tests plus configured cross-module and OpenAPI checks. Native build systems own task scheduling; harness does not wrap Gradle or Swift in Node.
+Local builds run static constraints. Verification tasks run the project's existing tests plus configured cross-module and OpenAPI checks. Native build systems own task scheduling; Harness Gate does not wrap Gradle or Swift in Node.
 
 ## Develop and package
 
@@ -53,10 +53,10 @@ HARNESS_OASDIFF=/path/to/oasdiff python3 integrations/openapi/test_integration.p
 
 ## Integrate an existing project
 
-Start with the [runnable example projects](examples/README.md) to inspect a complete target integration. `npm run examples:verify` builds each example, verifies that an injected violation blocks its original build, and confirms recovery after restoring the source.
+Start with the [runnable example projects](examples/README.md) to inspect a complete target integration. `npm run examples:verify` builds each example, verifies that an injected violation blocks its original build, and confirms recovery after restoring the source. After installing `harness-gate-cli`, run `harness-gate-cli init --root /path/to/target`. From a local source checkout, use:
 
 ```sh
-node /path/to/harness/packages/cli/dist/index.js init --root /path/to/target
+node /path/to/harness-gate/packages/cli/dist/index.js init --root /path/to/target
 ```
 
 This writes `.harness/integration/integration.patch` and instructions inside the target. Review the candidate policy and apply the patch with `git apply`. Install the packages from your registry or local tarballs, update the target's own lockfile, then run its original build command.

@@ -221,7 +221,7 @@ export async function findRoot(start: string): Promise<string> {
     const parent = path.dirname(current);
     if (parent === current)
       throw new Error(
-        "No harness.yaml found; integrate the project with harness init",
+        "No harness.yaml found; integrate the project with harness-gate-cli init",
       );
     current = parent;
   }

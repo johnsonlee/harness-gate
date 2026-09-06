@@ -2,7 +2,7 @@ import { readFile, readdir, mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { createTwoFilesPatch } from "diff";
 import { stringify } from "yaml";
-import { type Config, type Module } from "@harness-engine/core";
+import { type Config, type Module } from "harness-gate-core";
 
 const ignore = new Set([
   "node_modules",
@@ -75,7 +75,7 @@ export async function initialize(
   const existing = await read(root, "harness.yaml");
   if (existing) {
     const instructions =
-      "harness.yaml already exists. Initialization does not rewrite an established policy. Update native integration and policy explicitly; run harness doctor to inspect it.\n";
+      "harness.yaml already exists. Initialization does not rewrite an established policy. Update native integration and policy explicitly; run harness-gate-cli doctor to inspect it.\n";
     await mkdir(out, { recursive: true });
     await writeFile(path.join(out, "integration.patch"), "");
     await writeFile(path.join(out, "README.md"), instructions);
@@ -164,14 +164,14 @@ export async function initialize(
       );
     pkg.scripts = {
       ...pkg.scripts,
-      build: "harness-build build",
-      check: "harness-build check",
+      build: "harness-gate build",
+      check: "harness-gate check",
       "lint:harness": "eslint --config eslint.harness.config.mjs .",
     };
     pkg.devDependencies = {
       ...pkg.devDependencies,
-      "@harness-engine/build": "0.1.0",
-      "@harness-engine/eslint-plugin": "0.1.0",
+      "harness-gate": "0.1.0",
+      "eslint-plugin-harness-gate": "0.1.0",
     };
     if (!dependencies.eslint) pkg.devDependencies.eslint = "^9.39.0";
     if (!dependencies["typescript-eslint"])
@@ -185,7 +185,7 @@ export async function initialize(
       : `  { ignores: ['dist/**', 'build/**', '.next/**', 'node_modules/**', '.harness/**'] },\n  { files: ['**/*.{ts,tsx,mts,cts}'], languageOptions: { parser: tseslint.parser, parserOptions: { ecmaFeatures: { jsx: true } } } },\n`;
     replacements.set(
       lintFile,
-      `import harness from '@harness-engine/eslint-plugin';\n${existingLint ? `import existing from './${existingLint}';\n` : `import tseslint from 'typescript-eslint';\n`}\nexport default [\n${existingLint ? "  ...(Array.isArray(existing) ? existing : [existing]),\n" : ""}${candidate}  {\n    files: ['**/*.{js,mjs,cjs,jsx,ts,tsx,mts,cts}'],\n${existingLint ? "" : `    languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } },\n`}    plugins: { harness },\n    rules: {\n      // Candidate policy: replace patterns with your explicit prohibited imports.\n${existingLint ? `      // 'harness/forbidden-imports': ['error', { patterns: [] }]\n` : `      'harness/forbidden-imports': ['error', { patterns: [] }]\n`}    }\n  }\n];\n`,
+      `import harness from 'eslint-plugin-harness-gate';\n${existingLint ? `import existing from './${existingLint}';\n` : `import tseslint from 'typescript-eslint';\n`}\nexport default [\n${existingLint ? "  ...(Array.isArray(existing) ? existing : [existing]),\n" : ""}${candidate}  {\n    files: ['**/*.{js,mjs,cjs,jsx,ts,tsx,mts,cts}'],\n${existingLint ? "" : `    languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } },\n`}    plugins: { harness },\n    rules: {\n      // Candidate policy: replace patterns with your explicit prohibited imports.\n${existingLint ? `      // 'harness/forbidden-imports': ['error', { patterns: [] }]\n` : `      'harness/forbidden-imports': ['error', { patterns: [] }]\n`}    }\n  }\n];\n`,
     );
     config.checks.push({
       id: `${id}-lint`,

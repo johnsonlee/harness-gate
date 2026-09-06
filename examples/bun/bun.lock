@@ -5,17 +5,17 @@
     "": {
       "name": "harness-example-bun",
       "devDependencies": {
-        "@harness-engine/build": "file:../../.harness/artifacts/harness-engine-build-0.1.0.tgz",
-        "@harness-engine/core": "file:../../.harness/artifacts/harness-engine-core-0.1.0.tgz",
-        "@harness-engine/eslint-plugin": "file:../../.harness/artifacts/harness-engine-eslint-plugin-0.1.0.tgz",
         "eslint": "9.39.5",
+        "eslint-plugin-harness-gate": "file:../../.harness/artifacts/eslint-plugin-harness-gate-0.1.0.tgz",
+        "harness-gate": "file:../../.harness/artifacts/harness-gate-0.1.0.tgz",
+        "harness-gate-core": "file:../../.harness/artifacts/harness-gate-core-0.1.0.tgz",
         "typescript": "5.9.3",
         "typescript-eslint": "8.69.0",
       },
     },
   },
   "overrides": {
-    "@harness-engine/core": "file:../../.harness/artifacts/harness-engine-core-0.1.0.tgz",
+    "harness-gate-core": "file:../../.harness/artifacts/harness-gate-core-0.1.0.tgz",
   },
   "packages": {
     "@eslint-community/eslint-utils": ["@eslint-community/eslint-utils@4.10.1", "", { "dependencies": { "eslint-visitor-keys": "^3.4.3" }, "peerDependencies": { "eslint": "^6.0.0 || ^7.0.0 || >=8.0.0" } }, "sha512-cuadcxVFE8sDK6iWJbs8Sn0av2Nrh2QSGQhVlBW9AaAHqHwjWsZHT8LJ4hFGPh7ASBV2deFdM7H/DPjulmh8rg=="],
@@ -35,12 +35,6 @@
     "@eslint/object-schema": ["@eslint/object-schema@2.1.7", "", {}, "sha512-VtAOaymWVfZcmZbp6E2mympDIHvyjXs/12LqWYjVw6qjrfF+VK+fyG33kChz3nnK+SU5/NeHOqrTEHS8sXO3OA=="],
 
     "@eslint/plugin-kit": ["@eslint/plugin-kit@0.4.1", "", { "dependencies": { "@eslint/core": "^0.17.0", "levn": "^0.4.1" } }, "sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA=="],
-
-    "@harness-engine/build": ["@harness-engine/build@../../.harness/artifacts/harness-engine-build-0.1.0.tgz", { "dependencies": { "@harness-engine/core": "0.1.0" }, "bin": { "harness-build": "dist/index.js" } }, "sha512-W8eV8ADEKqw0G3tjfXiT6kbTlxCwZRAaNimM+m9KP/nCvECWrvRj/PRXOJWRMyo9qJur/YtU0GOmneYQajvyVA=="],
-
-    "@harness-engine/core": ["@harness-engine/core@../../.harness/artifacts/harness-engine-core-0.1.0.tgz", { "dependencies": { "yaml": "^2.9.0" } }, "sha512-QPNp+56v5YXSaFBJhtrrh5R5VhtELBXwEz4coD5ObY8LdTZPCVhfNQh4JDp8ABi1j1sg2UuprQZeEwugHQfiAg=="],
-
-    "@harness-engine/eslint-plugin": ["@harness-engine/eslint-plugin@../../.harness/artifacts/harness-engine-eslint-plugin-0.1.0.tgz", { "peerDependencies": { "eslint": "^9.0.0 || ^10.0.0" } }, "sha512-Rfikzb419DXxEQskze8obj5keZuzBLwAkQ9Ag9w+52k4vwrvSSqbF2IFVDdNBLS075ul9QJTJspEt28iLx1IUg=="],
 
     "@humanfs/core": ["@humanfs/core@0.19.2", "", { "dependencies": { "@humanfs/types": "^0.15.0" } }, "sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA=="],
 
@@ -110,6 +104,8 @@
 
     "eslint": ["eslint@9.39.5", "", { "dependencies": { "@eslint-community/eslint-utils": "^4.8.0", "@eslint-community/regexpp": "^4.12.1", "@eslint/config-array": "^0.21.2", "@eslint/config-helpers": "^0.4.2", "@eslint/core": "^0.17.0", "@eslint/eslintrc": "^3.3.6", "@eslint/js": "9.39.5", "@eslint/plugin-kit": "^0.4.1", "@humanfs/node": "^0.16.6", "@humanwhocodes/module-importer": "^1.0.1", "@humanwhocodes/retry": "^0.4.2", "@types/estree": "^1.0.6", "ajv": "^6.14.0", "chalk": "^4.0.0", "cross-spawn": "^7.0.6", "debug": "^4.3.2", "escape-string-regexp": "^4.0.0", "eslint-scope": "^8.4.0", "eslint-visitor-keys": "^4.2.1", "espree": "^10.4.0", "esquery": "^1.5.0", "esutils": "^2.0.2", "fast-deep-equal": "^3.1.3", "file-entry-cache": "^8.0.0", "find-up": "^5.0.0", "glob-parent": "^6.0.2", "ignore": "^5.2.0", "imurmurhash": "^0.1.4", "is-glob": "^4.0.0", "json-stable-stringify-without-jsonify": "^1.0.1", "lodash.merge": "^4.6.2", "minimatch": "^3.1.5", "natural-compare": "^1.4.0", "optionator": "^0.9.3" }, "peerDependencies": { "jiti": "*" }, "optionalPeers": ["jiti"], "bin": { "eslint": "bin/eslint.js" } }, "sha512-DgZS62aPLXKlnxILS/AYCoRvHaZeXceIzlXPkkGGzJWSow1aEk0lbTlxUSlyjC8jcaKxAdOnTDz+o1JFSBsyjw=="],
 
+    "eslint-plugin-harness-gate": ["eslint-plugin-harness-gate@../../.harness/artifacts/eslint-plugin-harness-gate-0.1.0.tgz", { "peerDependencies": { "eslint": "^9.0.0 || ^10.0.0" } }, "sha512-k6dCxiAIadVQ27WxOC7Tdddslmg8TybmMqcK03oFlfJdId7DdzztTqeKFjwGQsudn7N8W/Q+Bkh57dMPxa4YJQ=="],
+
     "eslint-scope": ["eslint-scope@8.4.0", "", { "dependencies": { "esrecurse": "^4.3.0", "estraverse": "^5.2.0" } }, "sha512-sNXOfKCn74rt8RICKMvJS7XKV/Xk9kA7DyJr8mJik3S7Cwgy3qlkkmyS2uQB3jiJg6VNdZd/pDBJu0nvG2NlTg=="],
 
     "eslint-visitor-keys": ["eslint-visitor-keys@4.2.1", "", {}, "sha512-Uhdk5sfqcee/9H/rCOJikYz67o0a2Tw2hGRPOG2Y1R2dg7brRe1uG0yaNQDHu+TO/uQPF/5eCapvYSmHUjt7JQ=="],
@@ -143,6 +139,10 @@
     "glob-parent": ["glob-parent@6.0.2", "", { "dependencies": { "is-glob": "^4.0.3" } }, "sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A=="],
 
     "globals": ["globals@14.0.0", "", {}, "sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ=="],
+
+    "harness-gate": ["harness-gate@../../.harness/artifacts/harness-gate-0.1.0.tgz", { "dependencies": { "harness-gate-core": "0.1.0" }, "bin": { "harness-gate": "dist/index.js" } }, "sha512-4mIptnBx3m7Q1J8ltq+ANTSHXPY+IS1dF8d9bpt86YD2u/rpfjSk0WydNCtE7Lhg20DzAC7yCR//4WTaGfd04A=="],
+
+    "harness-gate-core": ["harness-gate-core@../../.harness/artifacts/harness-gate-core-0.1.0.tgz", { "dependencies": { "yaml": "^2.9.0" } }, "sha512-ai8Rq1e0UyVJ9aw8ZyLTd5BQFOjmTMpEMw6hiWZQh3G2/8WzdU1TLpypRmNk9wbkzy0Ba6BRjsGA0JfQ+ZMGLQ=="],
 
     "has-flag": ["has-flag@4.0.0", "", {}, "sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ=="],
 

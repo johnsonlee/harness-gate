@@ -2,15 +2,15 @@
 
 ## Install shared libraries
 
-From a configured package registry, install `@harness-engine/core`, `@harness-engine/build`, and `@harness-engine/eslint-plugin` at a fixed matching version. During development, `npm run pack:local` creates all artifacts; install their tarball paths together so internal dependencies resolve locally. Also install the target's compatible ESLint and TypeScript parser versions. These are development tools, not application runtime dependencies.
+From a configured package registry, install `harness-gate-core`, `harness-gate`, and `eslint-plugin-harness-gate` at a fixed matching version. During development, `npm run pack:local` creates all artifacts; install their tarball paths together so internal dependencies resolve locally. Also install the target's compatible ESLint and TypeScript parser versions. These are development tools, not application runtime dependencies.
 
 Existing project commands are preserved explicitly:
 
 ```json
 {
   "scripts": {
-    "build": "harness-build build",
-    "check": "harness-build check",
+    "build": "harness-gate build",
+    "check": "harness-gate check",
     "lint:harness": "eslint --config eslint.harness.config.mjs ."
   },
   "harness": {
@@ -45,13 +45,15 @@ Use `[bun, run, 'lint:harness']` for Bun. For a single-package project, set `pat
 
 ## Monorepos
 
+Install `harness-gate-cli` as a development dependency when using repository-wide verification commands.
+
 Each buildable package has its own preserved commands and a module entry. Actual package dependency declarations and explicitly declared `modules[].dependencies` form the impact graph. `allowedDependencies`, when present, constrains local module dependencies. Native Gradle/Swift plugins enforce their own source and build models; cross-stack relationships are explicit.
 
-`harness verify --base <commit>` selects changed modules and consumers transitively, delegates integrated Web/Bun modules to their native check scripts, and aggregates their reports. Root configuration, lockfiles and unknown changed paths select all modules. OpenAPI participants are conservatively selected whenever any inputs change, covering relative references outside the provider without pretending to have a complete reference graph. Set the root package's existing check script to this command for cross-stack verification. Module-local `HARNESS_BASE=<commit> npm run check` provides a baseline for that module's contract checks; it does not replace repository-wide consumer validation. Without a baseline, configured contracts fail as unavailable rather than bypassing compatibility.
+`harness-gate-cli verify --base <commit>` selects changed modules and consumers transitively, delegates integrated Web/Bun modules to their native check scripts, and aggregates their reports. Root configuration, lockfiles and unknown changed paths select all modules. OpenAPI participants are conservatively selected whenever any inputs change, covering relative references outside the provider without pretending to have a complete reference graph. Set the root package's existing check script to this command for cross-stack verification. Module-local `HARNESS_BASE=<commit> npm run check` provides a baseline for that module's contract checks; it does not replace repository-wide consumer validation. Without a baseline, configured contracts fail as unavailable rather than bypassing compatibility.
 
 ## Custom lint
 
-Develop reusable rules in the harness repository, publish versioned native libraries, and enable them in the target's existing tool. The lint engine owns parsing, rule options and native suppression. No additional harness plugin is needed for a command that already exits nonzero on violations.
+Develop reusable rules in the harness-gate repository, publish versioned native libraries, and enable them in the target's existing tool. The lint engine owns parsing, rule options and native suppression. No additional Harness Gate plugin is needed for a command that already exits nonzero on violations.
 
 ```yaml
 checks:

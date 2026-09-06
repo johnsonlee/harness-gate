@@ -174,7 +174,7 @@ export async function verify(
       const pkg = JSON.parse(
         await readFile(path.join(root, m.path, "package.json"), "utf8"),
       );
-      if (pkg.scripts?.check === "harness-build check" && pkg.harness?.build)
+      if (pkg.scripts?.check === "harness-gate check" && pkg.harness?.build)
         delegated.set(m.id, {
           manager:
             m.stack === "bun" ||

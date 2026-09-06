@@ -3,7 +3,7 @@
 Reusable AST-based rules for JavaScript and TypeScript imports. Install this package alongside ESLint 9 or 10. TypeScript syntax requires the target project's TypeScript parser; JSX requires its existing JSX parser options. Keep existing framework and parser configuration.
 
 ```js
-import harness from '@harness-engine/eslint-plugin';
+import harness from 'eslint-plugin-harness-gate';
 
 export default [
   harness.configs.recommended,

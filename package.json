@@ -1,5 +1,5 @@
 {
-  "name": "harness-engine",
+  "name": "harness-gate",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "tsc -b",
-    "test": "npm run build && node --test tests/*.test.mjs && npm test --workspace @harness-engine/eslint-plugin",
+    "test": "npm run build && node --test tests/*.test.mjs && npm test --workspace eslint-plugin-harness-gate",
     "test:consumers": "npm run build && node --test tests/consumers/*.test.mjs",
     "check": "npm test && npm run test:consumers",
     "pack:local": "npm run build && node scripts/pack.mjs",

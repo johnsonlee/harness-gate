@@ -17,7 +17,7 @@ test('packed rule library runs in an independent TS/JSX consumer', async () => {
     assert.ok(!packed[0].files.some(file => file.path.startsWith('test/')));
     await fs.writeFile(path.join(scratch, 'package.json'), JSON.stringify({ name: 'external-consumer', private: true, type: 'module' }));
     execFileSync('npm', ['install', '--offline', '--ignore-scripts', '--legacy-peer-deps', '--no-audit', '--no-fund', path.join(scratch, packed[0].filename)], { cwd: scratch, encoding: 'utf8' });
-    const plugin = (await import(pathToFileURL(path.join(scratch, 'node_modules/@harness-engine/eslint-plugin/src/index.js')).href)).default;
+    const plugin = (await import(pathToFileURL(path.join(scratch, 'node_modules/eslint-plugin-harness-gate/src/index.js')).href)).default;
     await fs.mkdir(path.join(scratch, 'apps/server'), { recursive: true });
     await fs.mkdir(path.join(scratch, 'apps/web'), { recursive: true });
     await fs.mkdir(path.join(scratch, 'packages/shared'), { recursive: true });

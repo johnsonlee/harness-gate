@@ -11,7 +11,7 @@ import {
   digest,
   snapshot,
   inside,
-} from "@harness-engine/core";
+} from "harness-gate-core";
 import { initialize } from "./init.js";
 
 async function main() {
@@ -29,7 +29,7 @@ async function main() {
   const [command, taskFile] = positionals;
   if (values.help || !command) {
     console.log(
-      "harness init [--root path] [--out path]\nharness doctor [--root path]\nharness verify [--base ref | --module id] [--json]\nharness start <task.json>\nharness finish [--base ref] [--json]\nNative builds use their existing Gradle, Swift, npm or Bun entry points.",
+      "harness-gate-cli init [--root path] [--out path]\nharness-gate-cli doctor [--root path]\nharness-gate-cli verify [--base ref | --module id] [--json]\nharness-gate-cli start <task.json>\nharness-gate-cli finish [--base ref] [--json]\nNative builds use their existing Gradle, Swift, npm or Bun entry points.",
     );
     return;
   }
@@ -78,7 +78,7 @@ async function main() {
         const p = JSON.parse(
           await readFile(path.join(root, m.path, "package.json"), "utf8"),
         );
-        if (p.scripts?.build !== "harness-build build" || !p.harness?.build)
+        if (p.scripts?.build !== "harness-gate build" || !p.harness?.build)
           issues.push(`${m.id}: native build integration is missing`);
       }
     }

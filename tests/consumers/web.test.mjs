@@ -34,7 +34,7 @@ test('packed harness gates real Node, React, Next and Bun native builds', { time
       if (name !== 'eslint-plugin') assert.ok(packed.files.some(file => file.path === 'dist/index.js'), `Build ${name} before consumer tests`);
       tarballs.push(path.join(scratch, packed.filename));
     }
-    await write(scratch, 'package.json', JSON.stringify({ name: 'external-harness-build-consumers', private: true, type: 'module' }));
+    await write(scratch, 'package.json', JSON.stringify({ name: 'external-harness-gate-consumers', private: true, type: 'module' }));
     // One independent installation is shared by four child projects, as in a monorepo.
     // Versions are fixed; these builds never import source from the harness repository.
     const installation = await run('npm', ['install', '--no-audit', '--no-fund', ...tarballs,
@@ -76,14 +76,14 @@ test('packed harness gates real Node, React, Next and Bun native builds', { time
       const root = path.join(scratch, fixture.stack);
       const pkg = {
         name: `consumer-${fixture.stack}`, private: true, type: 'module',
-        scripts: { build: 'harness-build build' },
+        scripts: { build: 'harness-gate build' },
         harness: { build: `node mark-build.mjs && ${fixture.build}` },
-        dependencies: { '@harness-engine/build': '0.1.0', '@harness-engine/eslint-plugin': '0.1.0', react: '19.2.8', 'react-dom': '19.2.8' },
+        dependencies: { 'harness-gate': '0.1.0', 'eslint-plugin-harness-gate': '0.1.0', react: '19.2.8', 'react-dom': '19.2.8' },
       };
       await write(root, 'package.json', JSON.stringify(pkg, null, 2));
       await write(root, 'mark-build.mjs', 'import { mkdirSync, writeFileSync } from "fs"; mkdirSync(".harness", {recursive:true}); writeFileSync(".harness/build-invoked.marker", "invoked");');
       await write(root, 'harness.yaml', JSON.stringify({ version: 1, modules: [{ id: 'app', path: '.', stack: fixture.stack }], checks: [{ id: 'lint', modules: ['app'], phase: 'static', command: ['node', eslintBin, '.'] }] }));
-      await write(root, 'eslint.config.mjs', `import harness from '@harness-engine/eslint-plugin';
+      await write(root, 'eslint.config.mjs', `import harness from 'eslint-plugin-harness-gate';
 import tseslint from 'typescript-eslint';
 export default [
   { ignores: ['dist/**', '.next/**', '.harness/**', 'next-env.d.ts'] },

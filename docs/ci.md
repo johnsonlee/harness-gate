@@ -9,9 +9,9 @@ The repository workflow `.github/workflows/ci.yml` validates the distributed rul
 | Swift | Swift unit tests and independent native SwiftPM and Xcode iOS Simulator framework builds on macOS |
 | OpenAPI | Real oasdiff v1.27.0, including breaking changes and isolated baseline relative-reference resolution |
 
-The final **Harness required checks** job runs even when dependencies fail. It accepts only an exact set of successful jobs; failed, cancelled, skipped or missing dependencies fail the gate. Gradle JUnit reports must contain the Android, JVM and Lint suites with no skipped tests. The Swift job requires the iOS Simulator SDK and explicit SwiftPM/Xcode success evidence. These checks prevent conditional local skips from being accepted in CI.
+The final **Harness Gate required checks** job runs even when dependencies fail. It accepts only an exact set of successful jobs; failed, cancelled, skipped or missing dependencies fail the gate. Gradle JUnit reports must contain the Android, JVM and Lint suites with no skipped tests. The Swift job requires the iOS Simulator SDK and explicit SwiftPM/Xcode success evidence. These checks prevent conditional local skips from being accepted in CI.
 
-Make **Harness required checks** a required status check in branch protection or a repository ruleset. Protect changes to `.github/`, rule configuration, lockfiles and check scripts using the repository's review policy. The workflow itself cannot establish server-side branch protection. Jobs use read-only repository permissions and do not publish packages or deploy anything.
+Make **Harness Gate required checks** a required status check in branch protection or a repository ruleset. Protect changes to `.github/`, rule configuration, lockfiles and check scripts using the repository's review policy. The workflow itself cannot establish server-side branch protection. Jobs use read-only repository permissions and do not publish packages or deploy anything.
 
 The workflow uses pinned action major versions, Bun 1.3.11, the checked-in Gradle wrapper and a fixed oasdiff module version. Hosted macOS images and the Node 22 patch release can change; their actual tool versions appear in run logs. Pin a specific available Xcode installation when your project requires a fixed SDK version. The workflow does not claim a remote CI run succeeded until an actual GitHub run has completed.
 
@@ -59,11 +59,11 @@ jobs:
 
 In these examples the build plugins and lint rules must already be connected in the target project. Add Bun setup and the project's frozen-lockfile install when its entry point is `bun run check`. An unsigned generic Simulator build verifies compilation and attached checks; it does not run application tests. Add the real native test task separately, using a bootable simulator destination where required.
 
-For full cross-module acceptance, run the target project's Harness contract/verification command after fetching the configured Git base. The [OpenAPI integration](../integrations/openapi/README.md) documents `HARNESS_BASE`, `HARNESS_CONTRACT`, tool installation and consumer selection. Generated clients require an explicit regeneration-and-consistency check.
+For full cross-module acceptance, run the target project's Harness Gate contract/verification command after fetching the configured Git base. The [OpenAPI integration](../integrations/openapi/README.md) documents `HARNESS_BASE`, `HARNESS_CONTRACT`, tool installation and consumer selection. Generated clients require an explicit regeneration-and-consistency check.
 
 Copy the workflow's `required` aggregation pattern and change both `needs` and the asserted job set to match the target project's actual required jobs. Do not add `continue-on-error` or path-based skips to mandatory platform checks. Local reports do not substitute for these independent CI executions.
 
-Gradle's native XML/HTML, Swift's Harness JSON, oasdiff's own JSON and the CLI's report are distinct formats. Preserve native reports for diagnostics; an exit-code integration does not automatically convert a report into Harness findings. No universal report schema is implied by this template.
+Gradle's native XML/HTML, Swift's Harness Gate JSON, oasdiff's own JSON and the CLI's report are distinct formats. Preserve native reports for diagnostics; an exit-code integration does not automatically convert a report into Harness Gate findings. No universal report schema is implied by this template.
 
 References: [Gradle on GitHub Actions](https://docs.gradle.org/current/userguide/github-actions.html), [Bun setup](https://bun.com/guides/runtime/cicd), [hosted runner images](https://github.com/actions/runner-images), [GitHub job dependencies](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idneeds).
 

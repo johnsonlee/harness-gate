@@ -115,7 +115,7 @@ test("applied config preserves existing parser, scoped policies and source under
     root,
     "eslint.config.mjs",
     `import tseslint from 'typescript-eslint';
-import harness from '@harness-engine/eslint-plugin';
+import harness from 'eslint-plugin-harness-gate';
 const parser = { ...tseslint.parser, meta: { name: 'project-typescript-parser' } };
 export default [
   { ignores: ['src/ignored/**'] },
@@ -175,7 +175,7 @@ test("init discovers source packages named build while excluding ordinary genera
   const pkg = JSON.parse(
     await fs.readFile(path.join(root, "packages/build/package.json"), "utf8"),
   );
-  assert.equal(pkg.scripts.build, "harness-build build");
+  assert.equal(pkg.scripts.build, "harness-gate build");
   assert.equal(pkg.harness.build, "tsc");
 });
 

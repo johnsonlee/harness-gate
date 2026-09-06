@@ -122,7 +122,7 @@ const dependencyBoundaries = {
 };
 
 const plugin = {
-  meta: { name: '@harness-engine/eslint-plugin', version: '0.1.0' },
+  meta: { name: 'eslint-plugin-harness-gate', version: '0.1.0' },
   rules: { 'forbidden-imports': forbiddenImports, 'dependency-boundaries': dependencyBoundaries },
   configs: {},
 };

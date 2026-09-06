@@ -66,7 +66,7 @@ test("init emits an applicable patch, preserves scripts and existing ESLint conf
     build: pkg.scripts.build,
     check: pkg.scripts.check,
   });
-  assert.equal(next.scripts.build, "harness-build build");
+  assert.equal(next.scripts.build, "harness-gate build");
   assert.match(
     await readFile(path.join(root, "eslint.harness.config.mjs"), "utf8"),
     /import existing from '\.\/eslint.config.mjs'/,
@@ -188,11 +188,11 @@ test("finish delegates to native check and rejects a failing original build; nes
   await chmod(executable, 0o755);
   await symlink(
     executable,
-    path.join(root, "node_modules", ".bin", "harness-build"),
+    path.join(root, "node_modules", ".bin", "harness-gate"),
   );
   const pkg = {
     name: "consumer",
-    scripts: { build: "harness-build build", check: "harness-build check" },
+    scripts: { build: "harness-gate build", check: "harness-gate check" },
     harness: { build: 'node -e "process.exit(9)"' },
   };
   await writeFile(path.join(root, "package.json"), JSON.stringify(pkg));

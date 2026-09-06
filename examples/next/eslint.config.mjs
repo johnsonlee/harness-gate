@@ -1,4 +1,4 @@
-import harness from '@harness-engine/eslint-plugin';
+import harness from 'eslint-plugin-harness-gate';
 import tseslint from 'typescript-eslint';
 
 export default [

@@ -1,10 +1,10 @@
 {
-  "name": "@harness-engine/cli",
+  "name": "harness-gate-cli",
   "version": "0.1.0",
   "type": "module",
-  "bin": {"harness": "dist/index.js"},
+  "bin": {"harness-gate-cli": "dist/index.js"},
   "files": ["dist"],
-  "dependencies": {"@harness-engine/core": "0.1.0", "yaml": "^2.9.0", "diff": "^8.0.2"},
+  "dependencies": {"harness-gate-core": "0.1.0", "yaml": "^2.9.0", "diff": "^8.0.2"},
   "engines": {"node": ">=20.19"},
   "license": "UNLICENSED"
 }

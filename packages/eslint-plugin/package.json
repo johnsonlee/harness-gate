@@ -1,5 +1,5 @@
 {
-  "name": "@harness-engine/eslint-plugin",
+  "name": "eslint-plugin-harness-gate",
   "version": "0.1.0",
   "type": "module",
   "description": "Reusable, explicit architecture rules for ESLint",

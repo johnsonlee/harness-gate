@@ -35,6 +35,6 @@ Native builds do not require a task session. The existing `start` and `finish` h
 }
 ```
 
-`harness start task.json` records initial inputs. `allowedPaths` are repository-relative files or directory prefixes, not glob expressions. `harness finish` reruns verification, rejects changes outside those paths, and requires each referenced acceptance check to pass. It cannot certify arbitrary prose or human review; those acceptance items remain pending. `finish --module` is rejected because partial verification is not whole-task completion.
+`harness-gate-cli start task.json` records initial inputs. `allowedPaths` are repository-relative files or directory prefixes, not glob expressions. `harness-gate-cli finish` reruns verification, rejects changes outside those paths, and requires each referenced acceptance check to pass. It cannot certify arbitrary prose or human review; those acceptance items remain pending. `finish --module` is rejected because partial verification is not whole-task completion.
 
 Use `--base <commit>` when cross-version contracts are configured. The task snapshot and reports are local context; modifying local files cannot replace required CI enforcement. No command starts or controls an agent session.

@@ -1,4 +1,4 @@
-name: Harness CI
+name: Harness Gate CI
 
 on:
   pull_request:
@@ -165,7 +165,7 @@ jobs:
         run: python3 integrations/openapi/test_integration.py
 
   required:
-    name: Harness required checks
+    name: Harness Gate required checks
     runs-on: ubuntu-24.04
     if: always()
     needs: [web, gradle, swift, openapi]
