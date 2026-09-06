@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.harness/
+.gradle/
+.build/
+.swiftpm/
+build/
+!packages/build/
+.DS_Store
+local.properties
+*.tgz

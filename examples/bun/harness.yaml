@@ -1,0 +1,10 @@
+version: 1
+modules:
+  - id: app
+    path: .
+    stack: bun
+checks:
+  - id: lint
+    modules: [app]
+    phase: static
+    command: [node, node_modules/eslint/bin/eslint.js, .]

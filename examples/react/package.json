@@ -1,0 +1,33 @@
+{
+  "name": "harness-example-react",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "harness-gate build",
+    "check": "harness-gate check",
+    "lint": "eslint ."
+  },
+  "harness": {
+    "build": "tsc --noEmit && vite build"
+  },
+  "devDependencies": {
+    "harness-gate-core": "file:../../.harness/artifacts/harness-gate-core-0.1.0.tgz",
+    "harness-gate": "file:../../.harness/artifacts/harness-gate-0.1.0.tgz",
+    "eslint-plugin-harness-gate": "file:../../.harness/artifacts/eslint-plugin-harness-gate-0.1.0.tgz",
+    "eslint": "9.39.5",
+    "typescript-eslint": "8.69.0",
+    "typescript": "5.9.3",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@types/node": "20.19.0",
+    "vite": "8.2.2"
+  },
+  "engines": {
+    "node": ">=20.19"
+  },
+  "dependencies": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  }
+}

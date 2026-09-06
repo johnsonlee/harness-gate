@@ -1,0 +1,18 @@
+{
+  "stack": "node",
+  "install": [
+    "npm",
+    "ci",
+    "--no-audit",
+    "--no-fund"
+  ],
+  "build": [
+    "npm",
+    "run",
+    "build"
+  ],
+  "entry": "src/index.ts",
+  "violation": "\nimport \"node:fs\";\n",
+  "expectedDiagnostic": "harness/forbidden-imports",
+  "artifact": "dist/index.js"
+}

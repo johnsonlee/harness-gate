@@ -1,0 +1,26 @@
+{
+  "stack": "ios",
+  "build": [
+    "xcodebuild",
+    "-project",
+    "App.xcodeproj",
+    "-scheme",
+    "App",
+    "-destination",
+    "generic/platform=iOS Simulator",
+    "-derivedDataPath",
+    "build",
+    "-skipPackagePluginValidation",
+    "build"
+  ],
+  "additionalBuilds": [
+    [
+      "swift",
+      "build"
+    ]
+  ],
+  "entry": "Sources/App/App.swift",
+  "violation": "\nimport Dispatch\n",
+  "expectedDiagnostic": "swift/forbidden-import",
+  "artifact": "build/Build/Products/Debug-iphonesimulator/App.framework/App"
+}

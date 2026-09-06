@@ -1,0 +1,13 @@
+{
+  "name": "eslint-plugin-harness-gate",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Reusable, explicit architecture rules for ESLint",
+  "types": "./src/index.d.ts",
+  "exports": { ".": { "types": "./src/index.d.ts", "import": "./src/index.js", "default": "./src/index.js" } },
+  "files": ["src", "README.md"],
+  "scripts": { "test": "node --test test/*.test.js test/*.test.mjs" },
+  "peerDependencies": { "eslint": "^9.0.0 || ^10.0.0" },
+  "devDependencies": { "eslint": "^9.39.0", "typescript-eslint": "^8.69.0" },
+  "engines": { "node": ">=20.19.0" }
+}

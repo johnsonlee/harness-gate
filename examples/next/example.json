@@ -1,0 +1,18 @@
+{
+  "stack": "next",
+  "install": [
+    "npm",
+    "ci",
+    "--no-audit",
+    "--no-fund"
+  ],
+  "build": [
+    "npm",
+    "run",
+    "build"
+  ],
+  "entry": "app/page.tsx",
+  "violation": "\nimport \"node:fs\";\n",
+  "expectedDiagnostic": "harness/forbidden-imports",
+  "artifact": ".next/BUILD_ID"
+}

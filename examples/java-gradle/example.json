@@ -1,0 +1,8 @@
+{
+  "stack": "java-gradle",
+  "build": ["../../integrations/gradle/gradlew", "--no-daemon", "build"],
+  "entry": "src/main/java/io/johnsonlee/harness/example/domain/Greeting.java",
+  "violation": "\nfinal class InvalidDomainDependency { void callService() { io.johnsonlee.harness.example.service.Main.main(new String[0]); } }\n",
+  "expectedDiagnostic": "package boundary violation",
+  "artifact": "build/libs/harness-java-example.jar"
+}

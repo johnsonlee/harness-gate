@@ -1,0 +1,10 @@
+{
+  "name": "harness-gate",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {"harness-gate": "dist/index.js"},
+  "files": ["dist"],
+  "dependencies": {"harness-gate-core": "0.1.0"},
+  "engines": {"node": ">=20.19"},
+  "license": "UNLICENSED"
+}
